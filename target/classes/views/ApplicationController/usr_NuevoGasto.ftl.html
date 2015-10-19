@@ -1,0 +1,174 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> 
+<@layout.myLayout "Home page">    
+ <header> 
+         <nav class="navbar navbar-default navbar-fixed-top header">
+            <div class="container-fluid">
+
+             <div class="navbar-header">
+	    <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </a>
+        <a class="logo sf_regular" href="#">&lt PF || Comunidad IT &gt</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <div action="/volverHome" class="navbar-form navbar-right">
+	            <li class="dropdown">
+	              <button  class="dropdown-toggle btn btn-danger" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${usuario} <b class="caret"></b></button>
+	              
+	              <ul class="dropdown-menu ">
+	                <li><form action="/HOME" method="POST"><button type="submit" class="aSalir btn-group-justified">Ir a Home</button></form></li> 
+	                <li><form action="/volverHome" method="POST"><button type="submit" class="aSalir btn-group-justified"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</button></form></li>
+	              </ul>
+	            </li>
+            </div>
+          </ul>
+        </div>
+             
+             
+            </div> 
+          </div>  
+
+         </nav>
+
+
+ </header>
+<body class="">
+
+	
+
+<div class="container">
+
+	<div class="row main">
+		<div class="col-md-8 sectorTablas">
+			<br><h4>Ingresar Nuevo Gasto:</h4>
+			<form action="/NuevoGastoUSR" method="POST" class="form-horizontal" id="formGasto">
+				<div class="form-group">
+					<label class="control-label col-sm-2">Fecha:</label>
+					<div class="col-sm-4">
+						<input type="date" class="form-control" name="fechaNG" id="datePicker" disabled>
+						<label class="mensajeAlerta" id="llenarFec"></label>
+					</div>
+					<label class="control-label col-sm-2">Nro Remito:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" placeholder="XXXX-XXXXXX" name="remitoNG" id="remNG">
+						<label class="mensajeAlerta" id="llenarRem"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Consorcio:</label>
+					<div class="col-sm-4">
+						<select name="consorcioNG"  style="width:150px">
+							<#list consorcios as consorcio>
+								<option value="${consorcio.direccion}">${consorcio.clave} - ${consorcio.direccion}</option>
+							</#list>
+						</select>
+					</div>
+					<label class="control-label col-sm-2">Proveedor:</label>
+					<div class="col-sm-4">
+						<select name="proveedorNG" style="width:150px">
+							<#list proveedores as Proveedores>
+								<option value="${Proveedores.nombre}">Código: ${Proveedores.id} - ${Proveedores.nombre}</option>
+							</#list>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Importe:</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" placeholder="$ .-" name="impNG" onKeypress="if (event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" id="impNG">
+						<label class="mensajeAlerta" id="llenarImp"></label>
+					</div>
+					<label class="control-label col-sm-2">Detalle:</label>
+					<div class="col-sm-4">
+						<textarea type="text" class="form-control" placeholder="Detalle" name="DetalleNG" id="detaNG"></textarea>
+						<label class="mensajeAlerta" id="llenarDate"></label>
+					</div>
+					<div class="col-sm-2">
+						<button type="submit" class="btn btn-warning">Cargar</button><br><br>
+					</div>
+				</div>
+			</form>
+			
+			<h4>Gastos:</h4>
+			<table class="table table-bordered table-hover">
+					<tr class="warning">
+						<th>Fecha</th>
+						<th>Nº Remito</th>
+						<th>Consorcio</th>
+						<th>Proveedor</th>
+						<th>Importe</th>
+						<th>Detalle</th>
+					</tr>
+					<#list gastos as Gasto>
+					<tr>
+						<th>${Gasto.fecha}</th>
+						<th>${Gasto.nroRemito}</th>
+						<th>${Gasto.consorcio}</th>
+						<th>${Gasto.proveedor}</th>
+						<th>${Gasto.importe}</th>
+						<th>${Gasto.detalle}</th>
+					</#list>
+					</tr>
+					
+				</table>
+				
+		</div>
+			<div class="col-md-4 nuevoRegistro">
+				<br>
+				<div class="btn-group btn-group-justified" role="group" aria-label="...">	
+					<div class="btn-group" role="group">
+						<form action="/usr_mensajes" method="POST"><button type="submit" class="btn btn-primary">Ir a Mensajes</button></form>
+					</div>
+					<div class="btn-group" role="group">
+						<form action="/usr_gastos" method="POST"><button type="submit" class="btn btn-primary">Ir a Gastos</button></form>
+					</div>			
+				</div>	
+				
+				<table class="table table-bordered table-hover">
+				<br><label>Proveedores:</label>	
+					<tr class="info">
+						<th>id</th>
+						<th>Rubro</th>
+						<th>Nombre</th>
+					</tr>
+					<#list proveedores as Proveedores>
+					<tr>
+						<th>${Proveedores.id}</th>
+						<th>${Proveedores.rubro}</th>
+						<th>${Proveedores.nombre}</th>
+					</#list>
+					</tr>
+
+				</table>
+				
+				<table class="table table-bordered table-hover">
+				<label>Consorcios:</label>	
+					<tr class="info">
+						<th>Clave</th>
+						<th>Dirección</th>
+						<th>Fondo</th>
+					</tr>
+					<#list consorcios as consorcio>
+					<tr>
+						<th>${consorcio.clave}</th>
+						<th>${consorcio.direccion}</th>
+						<th>${consorcio.fondo}</th>
+					</tr>
+					</#list>
+
+				</table>
+
+
+			</div>
+		
+	</div>
+</div>
+	
+
+
+</body>
+
+</@layout.myLayout>

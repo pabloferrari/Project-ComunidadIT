@@ -1,0 +1,153 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> 
+<@layout.myLayout "Home page">    
+ <header> 
+         <nav class="navbar navbar-default navbar-fixed-top header">
+            <div class="container-fluid">
+
+             <div class="navbar-header">
+	    <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </a>
+        <a class="logo sf_regular" href="#">&lt PF || Comunidad IT &gt</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <div action="/volverHome" class="navbar-form navbar-right">
+	            <li class="dropdown">
+	              <button  class="dropdown-toggle btn btn-danger" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${usuario} <b class="caret"></b></button>
+	              <ul class="dropdown-menu ">
+	                <li><form action="/HOME" method="POST"><button type="submit" class="aSalir btn-group-justified">Ir a Home</button></form></li> 
+	                <li><form action="/volverHome" method="POST"><button type="submit" class="aSalir btn-group-justified"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</button></form></li>
+	              </ul>
+	            </li>
+            </div>
+          </ul>
+        </div>
+             
+             
+            </div> 
+          </div>  
+
+         </nav>
+
+
+ </header>
+<body>
+
+<div class="container">
+	
+	<div class="row main">
+		<div class="col-md-12 col-lg-9 sectorTablas">
+			<div class="row">
+				<br>
+				<div class="btn-group btn-group-justified" role="group" aria-label="...">			
+					<div class="btn-group" role="group">
+						<form action="/adm_consorcios" method="POST"><button type="submit" class="btn btn-primary">Ir a Consorcios</button></form>
+					</div>
+					<div class="btn-group" role="group">
+						<form action="/adm_usuarios" method="POST"><button type="submit" class="btn btn-primary">Ir a Usuarios</button></form>
+					</div>
+					<div class="btn-group" role="group">
+						<form action="/adm_gastos" method="POST"><button type="submit" class="btn btn-primary">Ir a Gastos</button></form>
+					</div>
+				</div>
+				
+			</div>
+
+			<h3>Listado de Proveedores:</h3>
+
+			<table class="table table-bordered table-hover">
+				<tr class="warning">
+					<th>id</th>
+					<th>Rubro</th>
+					<th>Nombre</th>
+					<th>Razon Social</th>
+					<th>CUIT</th>
+              		<th>Dirección</th>
+               		<th>Telefono</th>
+               		<th>Email</th>
+				</tr>
+				<#list proveedores as Proveedores>
+					<tr>
+						<th>${Proveedores.id}</th>
+						<th>${Proveedores.rubro}</th>
+						<th>${Proveedores.nombre}</th>
+						<th>${Proveedores.razon_social}</th>
+						<th>${Proveedores.cuit}</th>
+						<th>${Proveedores.direccion}</th>
+						<th>${Proveedores.telefono}</th>
+						<th>${Proveedores.email}</th>
+					</#list>
+					</tr>
+			</table>
+
+
+		</div>
+		<div class="col-md-12 col-lg-3 nuevoRegistro">
+			<br><h4>Ingresar Nuevo Proveedor:</h4>
+			<form action="/NuevoProv" method="POST" class="form-horizontal" id="formProv">
+				<div class="form-group">
+					<label class="control-label col-sm-4">Rubro:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="Rubro" name="rubroNP" id="rubroNP">
+						<label class="mensajeAlerta" id="llenarRubro"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Nombre:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="Nombre" name="nombreNP" id="nomNP">
+						<label class="mensajeAlerta" id="llenarNom"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Razon Social:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="Razon Social" name="rzNP" id="razNP">
+						<label class="mensajeAlerta" id="llenarRZ"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">CUIT:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="XX - XXXXXXXX - X" name="cuitNP" id="ctNP">
+						<label class="mensajeAlerta" id="llenarCuit"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Direccion:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="Dirección" name="direccionNP" id="direNP">
+						<label class="mensajeAlerta" id="llenarDir"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Telefono:</label>
+					<div class="col-sm-6">
+						<input type="mail" class="form-control" placeholder="xxxx - 15 - xxxxxxxx" name="telefonoNP" id="telNP">
+						<label class="mensajeAlerta" id="llenarTel"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Email:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="email" name="emailNP" id="emaNP">
+						<label class="mensajeAlerta" id="llenarMai"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4"></label>
+					<div class="col-sm-6">
+						<button type="submit" class="btn btn-warning">Cargar</button><br><br>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+	
+
+</body>
+</@layout.myLayout>

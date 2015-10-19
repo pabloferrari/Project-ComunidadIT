@@ -1,0 +1,71 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> 
+<@layout.myLayout "Home page">    
+ <header> 
+         <nav class="navbar navbar-default navbar-fixed-top header">
+            <div class="container-fluid">
+
+             <div class="navbar-header">
+	    <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </a>
+        <a class="logo sf_regular" href="#">&lt PF || Comunidad IT &gt</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <div action="/volverHome" class="navbar-form navbar-right">
+	            <li class="dropdown">
+	              <button  class="dropdown-toggle btn btn-danger" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${usuario} <b class="caret"></b></button>
+	            
+	              
+	              <ul class="dropdown-menu ">
+	              <!--  <li><form action="/usr_home" method="POST"><button type="submit" class="">Home</button></form></li>  --> 
+	                <li><form action="/volverHome" method="POST"><button type="submit" class="aSalir btn-group-justified"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</button></form></li>
+	              </ul>
+	            </li>
+            </div>
+          </ul>
+        </div>
+             
+             
+            </div> 
+          </div>  
+
+         </nav>
+
+
+ </header>
+<body class="">
+
+	
+
+<div class="container-fluid cuerpo main">
+
+	<div class="row main text-center">
+	
+		<h1 class="hidden-xs hidden-sm">¡BIENVENIDO! <small>&ltPF || Proyecto Comunidad IT&gt</small></h1>
+		<h3 class="hidden-md hidden-lg">¡BIENVENIDO! <small>&ltPF || Proyecto Comunidad IT&gt</small></h3>
+		<img class="img-responsive img-thumbnail" src="/assets/images/negocios.jpg">
+	
+	</div>
+	
+	<div class="row main text-center">
+		<div class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+			<br>
+				<form action="/adm_home" method="POST"><button type="submit" class="btn-group btn btn-primary btn-block">USUARIO ADMINISTRADOR</button></form><br>
+				<form action="/usr_home" method="POST"><button type="submit" class="btn-group btn btn-primary btn-block">USUARIO LIMITADO</button></form>
+ 			<br><br><br>
+		</div>
+		<div class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+		</div>
+	</div>
+</div>
+	
+
+
+</body>
+
+</@layout.myLayout>

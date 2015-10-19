@@ -1,0 +1,129 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> 
+<@layout.myLayout "Home page">    
+ <header> 
+         <nav class="navbar navbar-default navbar-fixed-top header">
+            <div class="container-fluid">
+
+             <div class="navbar-header">
+	    <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </a>
+        <a class="logo sf_regular" href="#">&lt PF || Comunidad IT &gt</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <div action="/volverHome" class="navbar-form navbar-right">
+	            <li class="dropdown">
+	              <button  class="dropdown-toggle btn btn-danger" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${usuario} <b class="caret"></b></button>
+	              <ul class="dropdown-menu ">
+	                <li><form action="/HOME" method="POST"><button type="submit" class="aSalir btn-group-justified">Ir a Home</button></form></li> 
+	                <li><form action="/volverHome" method="POST"><button type="submit" class="aSalir btn-group-justified"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</button></form></li>
+	              </ul>
+	            </li>
+            </div>
+          </ul>
+        </div>
+             
+             
+            </div> 
+          </div>  
+
+         </nav>
+
+
+ </header>
+<body>
+
+	
+
+<div class="container">
+	<div class="row main">
+		<div class="col-md-8 sectorTablas">
+			<div class="row">
+				<br>
+				<div class="btn-group btn-group-justified" role="group" aria-label="...">			
+					<div class="btn-group" role="group">
+						<form action="/adm_usuarios" method="POST"><button type="submit" class="btn btn-primary">Ir a Usuarios</button></form>
+					</div>
+					<div class="btn-group" role="group">
+						<form action="/adm_proveedores" method="POST"><button type="submit"class="btn btn-primary">Ir a Proveedores</button></form>
+					</div>
+					<div class="btn-group" role="group">
+						<form action="/adm_gastos" method="POST"><button type="submit" class="btn btn-primary">Ir a Gastos</button></form>
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			<h3>Listado de Consorcios:</h3>
+
+			<table class="table table-bordered table-hover">
+				<tr class="warning">
+					<th>Clave</th>
+					<th>Dirección</th>
+					<th>Cant. Unid.</th>
+					<th>Presupuesto</th>
+					<th>Fondo/Caja</th>
+				</tr>
+				<#list consorcios as consorcio>
+				<tr>
+					<th>${consorcio.clave}</th>
+					<th>${consorcio.direccion}</th>
+					<th>${consorcio.unidFun}</th>
+					<th>${consorcio.presupuesto}</th>
+					<th>${consorcio.fondo}</th>
+				</tr>
+				</#list>
+			</table>
+
+
+		</div>
+		<div class="col-md-4 nuevoRegistro">
+			<br><h4>Ingresar Nuevo Consorcio:</h4>
+			<form action="/NuevoConsorcio" method="POST" class="form-horizontal" id="formCons">
+				<div class="form-group">
+					<label class="control-label col-sm-4">Dirección:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="Dirección" name="direccionNC" id="dirNC">
+						<label class="mensajeAlerta" id="llenarDir"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Cant.Unid:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="Cant Unid" name="cantUniNC" id="cuNC">
+						<label class="mensajeAlerta" id="llenarCU"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Presupuesto:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="Presupuesto" name="presupNC" id="presNC" onKeypress="if (event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;">
+						<label class="mensajeAlerta" id="llenarPres"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-4">Fondo:</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" placeholder="Fondo" name="fondoNC" id="fondNC" onKeypress="if (event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;">
+						<label class="mensajeAlerta" id="llenarFond"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2"></label>
+					<div class="col-sm-offset-2 col-sm-4">
+						<button type="submit" class="btn btn-warning">Cargar</button><br><br>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>
+	
+
+</body>
+</@layout.myLayout>
